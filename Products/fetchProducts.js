@@ -17,11 +17,11 @@ async function fetchProductData() {
             const card = document.createElement('div');
             card.classList.add('col-md-4', 'mb-5');
             card.innerHTML = `
-                <div class="card">
-                    <img class="card-img-top" src="${productImage}" alt="${productTitle}">
+            <div class="card">
+                    <img class="card-img-top img-fluid" style="height: 300px; object-fit: contain;" src="${productImage}" alt="${productTitle}">
                     <div class="card-body">
                         <h4 class="card-title">${productTitle}</h4>
-                        <p class="card-text">${productDescription}</p>
+                        <p class="card-text text-truncate">${productDescription}</p>
                         <a href="#" class="btn btn-primary">Add to cart</a>
                     </div>
                 </div>
