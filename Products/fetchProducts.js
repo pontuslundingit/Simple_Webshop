@@ -21,7 +21,7 @@ async function fetchProductData() {
             card.classList.add('col-md-4', 'mb-5', 'd-flex', 'align-items-stretch');
             card.innerHTML = `
             <div class="card">
-                    <img class="clickable card-img-top img-fluid" style="height: 200px; object-fit: contain;" src="${productImage}" alt="${productTitle}" onclick="showProductDetails(${productId})">
+                    <img class="clickable card-img-top img-fluid p-3" style="height:200px; object-fit: contain;" src="${productImage}" alt="${productTitle}" onclick="showProductDetails(${productId})">
                     <div class="card-body d-flex flex-column">
                         <h4 class="card-title clickable" onclick="showProductDetails(${productId})">${productTitle}</h4>
                         <p class="card-text text-truncate">${productDescription}</p>
