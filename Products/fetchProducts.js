@@ -1,8 +1,3 @@
-
-
-
-
-
 async function fetchProductData() {
     try {
         const response = await fetch('https://fakestoreapi.com/products');
