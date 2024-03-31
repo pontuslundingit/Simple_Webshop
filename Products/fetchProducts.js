@@ -114,9 +114,6 @@ function addToCart(product) {
       <div class="card-body d-flex flex-column">
           <h4 class="card-title clickable" onclick="showProductDetails(${productId}, false)">${productTitle}</h4>
           <p class="card-text text-truncate">${productDescription}</p>
-          <div class="mt-auto">
-              <a href="#" class="btn btn-primary">Add to cart</a>
-          </div>
       </div>
   </div>
       `;
