@@ -47,10 +47,31 @@ async function fetchProductData() {
     }
 }
 
-function showProductDetails(productId) {
-    window.location.href = `productsFocus.html?id=${productId}`;
+function showProductDetails(productId, isSameDirectory) {    // if its true, its same directory
+    const baseUrl = isSameDirectory ? '' : 'products/';
+    window.location.href = `${baseUrl}productsFocus.html?id=${productId}`;
 }
 
+ 
+
+async function fetchRandomProducts() {
+    try {
+      const response = await fetch('https://fakestoreapi.com/products');
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      const randomProducts = getRandomElements(data, 3); // Get 3 random products
+      displayRandomProducts(randomProducts);
+    } catch (error) {
+      console.log('Error fetching product data:', error);
+    }
+  }
+  
+  function getRandomElements(array, numElements) {
+    const shuffled = array.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, numElements);
+  }
 
 
 fetchProductData();
@@ -72,7 +93,9 @@ function addToCart(product) {
     window.location.href = '../order.html';
 }
 
-function displayRandomProducts(products) {
+
+  function displayRandomProducts(products) {
+
     const container = document.getElementById('randomProductsContainer');
     container.innerHTML = ''; // Clear existing content
     
@@ -104,8 +127,10 @@ function displayRandomProducts(products) {
   }
   
 
-
 window.onload = function() {
+    fetchRandomProducts();
+    fetchProductData();
+
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
 
