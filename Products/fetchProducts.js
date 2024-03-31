@@ -15,21 +15,33 @@ async function fetchProductData() {
             const card = document.createElement('div');
             card.classList.add('col-md-4', 'mb-5', 'd-flex', 'align-items-stretch');
             card.innerHTML = `
-            <div class="card">
+                <div class="card">
                     <img class="clickable card-img-top img-fluid p-3" style="height:200px; object-fit: contain;" src="${productImage}" alt="${productTitle}" onclick="showProductDetails(${productId}, true)">
                     <div class="card-body d-flex flex-column">
                         <h4 class="card-title clickable" onclick="showProductDetails(${productId}, true)">${productTitle}</h4>
                         <p class="card-text text-truncate">${productDescription}</p>
                         <div class="mt-auto">
-                            <a href="#" class="btn btn-primary">Add to cart</a>
+                            <a href="#" class="btn btn-primary addToCartButton">Add to Cart</a>
                         </div>
                     </div>
                 </div>
             `;
-            
+
             const productsSection = document.querySelector('.products .row');
             productsSection.appendChild(card);
+
+            const productImageElement = card.querySelector('.card-img-top');
+            productImageElement.addEventListener('click', function() {
+                showProductDetails(productId);
+            });
+
+           
+            const addToCartButton = card.querySelector('.addToCartButton');
+            addToCartButton.addEventListener('click', function() {
+                addToCart(product);
+            });
         });
+
     } catch (error) {
         console.log('Error fetching product data:', error);
     }
@@ -61,7 +73,29 @@ async function fetchRandomProducts() {
     return shuffled.slice(0, numElements);
   }
 
+
+fetchProductData();
+
+function addToCart(product) {
+    // Save product information to local storage
+    const cartItem = {
+        id: product.id,
+        title: product.title,
+        image: product.image,
+        description: product.description
+    };
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    cartItems.push(cartItem);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+
+    console.log('Product added to cart:', cartItem);
+
+    window.location.href = '../order.html';
+}
+
+
   function displayRandomProducts(products) {
+
     const container = document.getElementById('randomProductsContainer');
     container.innerHTML = ''; // Clear existing content
     
@@ -92,7 +126,7 @@ async function fetchRandomProducts() {
     });
   }
   
-  
+
 window.onload = function() {
     fetchRandomProducts();
     fetchProductData();
@@ -111,8 +145,10 @@ window.onload = function() {
             document.getElementById('productTitle').textContent = product.title;
             document.getElementById('productImage').src = product.image;
             document.getElementById('productDescription').textContent = product.description;
-            document.getElementById('addToCartButton').addEventListener('click', function() {
-                // kod för addToCart här, redigera parametern sedan
+            
+            const addToCartButton = document.querySelector('.addToCartButton');
+            addToCartButton.addEventListener('click', function() {
+                addToCart(product);
             });
         })
         .catch(error => {
