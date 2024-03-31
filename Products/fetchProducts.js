@@ -32,7 +32,7 @@ async function fetchProductData() {
 
             const productImageElement = card.querySelector('.card-img-top');
             productImageElement.addEventListener('click', function() {
-                showProductDetails(productId);
+             //   showProductDetails(productId);
             });
 
            
