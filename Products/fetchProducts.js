@@ -16,9 +16,9 @@ async function fetchProductData() {
             card.classList.add('col-md-4', 'mb-5', 'd-flex', 'align-items-stretch');
             card.innerHTML = `
                 <div class="card">
-                    <img class="clickable card-img-top img-fluid p-3" style="height:200px; object-fit: contain;" src="${productImage}" alt="${productTitle}" onclick="showProductDetails(${productId})">
+                    <img class="clickable card-img-top img-fluid p-3" style="height:200px; object-fit: contain;" src="${productImage}" alt="${productTitle}" onclick="showProductDetails(${productId}, true)">
                     <div class="card-body d-flex flex-column">
-                        <h4 class="card-title clickable" onclick="showProductDetails(${productId})">${productTitle}</h4>
+                        <h4 class="card-title clickable" onclick="showProductDetails(${productId}, true)">${productTitle}</h4>
                         <p class="card-text text-truncate">${productDescription}</p>
                         <div class="mt-auto">
                             <a href="#" class="btn btn-primary addToCartButton">Add to Cart</a>
@@ -71,6 +71,38 @@ function addToCart(product) {
 
     window.location.href = '../order.html';
 }
+
+function displayRandomProducts(products) {
+    const container = document.getElementById('randomProductsContainer');
+    container.innerHTML = ''; // Clear existing content
+    
+    products.forEach(product => {
+        const productId = product.id;
+            const productImage = product.image;
+            const productTitle = product.title;
+            const productDescription = product.description;
+
+      // Create HTML elements for each product
+      const productCard = document.createElement('div');
+      productCard.classList.add('col-md-4', 'mb-5', 'd-flex', 'align-items-stretch');
+      productCard.innerHTML = `
+      <div class="card">
+      <img class="clickable card-img-top img-fluid p-3" style="height:200px; object-fit: contain;" src="${productImage}" alt="${productTitle}" onclick="showProductDetails(${productId}, false)">
+      <div class="card-body d-flex flex-column">
+          <h4 class="card-title clickable" onclick="showProductDetails(${productId}, false)">${productTitle}</h4>
+          <p class="card-text text-truncate">${productDescription}</p>
+          <div class="mt-auto">
+              <a href="#" class="btn btn-primary">Add to cart</a>
+          </div>
+      </div>
+  </div>
+      `;
+      
+      // Append the product card to the container
+      container.appendChild(productCard);
+    });
+  }
+  
 
 
 window.onload = function() {
