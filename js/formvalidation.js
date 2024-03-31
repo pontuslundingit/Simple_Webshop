@@ -9,7 +9,17 @@ orderForm.addEventListener('submit', e => {
     e.preventDefault();
     console.log('Form submitted');
 
-    validateInputs();
+    if (validateInputs()) {
+        const userData = {
+            name: inputName.value.trim(),
+            phone: inputPhone.value.trim(),
+            email: inputEmail.value.trim(),
+            address: inputAddress.value.trim()
+        };
+
+        localStorage.setItem('userData', JSON.stringify(userData));
+        window.location.href = '../confirmation.html';
+    }
 });
 
 const setError = (element, message) => {
