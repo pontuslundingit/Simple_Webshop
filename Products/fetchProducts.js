@@ -128,7 +128,8 @@ function addToCart(product) {
   
 
 window.onload = function() {
-fetchRandomProducts();
+    fetchRandomProducts();
+    
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
 
