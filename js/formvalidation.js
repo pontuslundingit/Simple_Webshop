@@ -74,8 +74,10 @@ const validateInputs = () => {
 
     if (phoneValue.length > 50) {
         setError(inputPhone, 'Phone number cannot be more than 50 characters long');
+        isValid = false;
     } else if (!phoneRegex.test(phoneValue)) {
         setError(inputPhone, 'Invalid phone number');
+        isValid = false;
     } else {
         setSuccess(inputPhone);
     }
@@ -108,5 +110,12 @@ const validateInputs = () => {
         setSuccess(inputAddress);
     }
 
-    return isValid; 
+    if (isValid) {
+        submitButton.disabled = false;
+    } else {
+        submitButton.disabled = true; 
+    }
+
+    return isValid;
+
 };
