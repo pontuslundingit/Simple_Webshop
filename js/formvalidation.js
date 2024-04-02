@@ -3,12 +3,27 @@ const inputName = document.querySelector('#inputName');
 const inputPhone = document.querySelector('#inputPhone');
 const inputEmail = document.querySelector('#inputEmail');
 const inputAddress = document.querySelector('#inputAddress');
-
-
+ 
+inputName.addEventListener('input', () => {
+    validateInputs();
+});
+ 
+inputPhone.addEventListener('input', () => {
+    validateInputs();
+});
+ 
+inputEmail.addEventListener('input', () => {
+    validateInputs();
+});
+ 
+inputAddress.addEventListener('input', () => {
+    validateInputs();
+});
+ 
 orderForm.addEventListener('submit', e => {
     e.preventDefault();
     console.log('Form submitted');
-
+ 
     if (validateInputs()) {
         const userData = {
             name: inputName.value.trim(),
@@ -16,25 +31,25 @@ orderForm.addEventListener('submit', e => {
             email: inputEmail.value.trim(),
             address: inputAddress.value.trim()
         };
-
+ 
         localStorage.setItem('userData', JSON.stringify(userData));
         window.location.href = '../confirmation.html';
     }
 });
-
+ 
 const setError = (element, message) => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector('.error');
-
+ 
     errorDisplay.innerText = message;
     inputControl.classList.add('error');
     inputControl.classList.remove('success');
 }
-
+ 
 const setSuccess = element => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector('.error');
-
+ 
     errorDisplay.innerText = '';
     inputControl.classList.add('success');
     inputControl.classList.remove('error');
