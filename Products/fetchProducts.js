@@ -61,7 +61,7 @@ async function fetchRandomProducts() {
           throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const randomProducts = getRandomElements(data, 3); // Get 3 random products
+      const randomProducts = getRandomElements(data, 3); // get 3 random products 
       displayRandomProducts(randomProducts);
     } catch (error) {
       console.log('Error fetching product data:', error);
@@ -97,7 +97,7 @@ function addToCart(product) {
   function displayRandomProducts(products) {
 
     const container = document.getElementById('randomProductsContainer');
-    container.innerHTML = ''; // Clear existing content
+    container.innerHTML = ''; // clear existing content
     
     products.forEach(product => {
         const productId = product.id;
