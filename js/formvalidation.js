@@ -110,11 +110,6 @@ const validateInputs = () => {
         setSuccess(inputAddress);
     }
 
-    if (isValid) {
-        submitButton.disabled = false;
-    } else {
-        submitButton.disabled = true; 
-    }
 
     return isValid;
 
